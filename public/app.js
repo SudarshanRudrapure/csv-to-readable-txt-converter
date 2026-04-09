@@ -163,6 +163,7 @@ async function doConvert() {
   }
 }
 
+
 // Download TXT
 function downloadFile() {
   if (!convertedText) return;
@@ -177,6 +178,7 @@ function downloadFile() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
 
 // Reset everything
 function resetAll() {
@@ -193,6 +195,7 @@ function resetAll() {
   resultSection.style.display = 'none';
   setStep(1);
 }
+
 
 // Helpers
 function setStep(n) {
