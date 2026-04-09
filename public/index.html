@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSV → Readable TXT Converter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="tag">Utility Tool</div>
+    <h1>CSV → Readable TXT</h1>
+    <p>Upload any CSV file and convert it into a clean, human-readable text report.</p>
+  </header>
+
+  <div class="steps">
+    <div class="step active" id="step1"><div class="step-num">1</div> Upload</div>
+    <div class="step-sep">›</div>
+    <div class="step" id="step2"><div class="step-num">2</div> Configure</div>
+    <div class="step-sep">›</div>
+    <div class="step" id="step3"><div class="step-num">3</div> Download</div>
+  </div>
+
+  <div class="error-bar" id="errorBar"></div>
+  <div class="loader" id="loader"><span></span> Processing...</div>
+
+
+  
+  <!-- Step 1: Upload -->
+  <div id="uploadSection">
+    <div class="card">
+      <div class="card-title">01 — Select File</div>
+      <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" accept=".csv,.txt"/>
+        <div class="drop-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 15V3m0 0L8 7m4-4l4 4"/>
+            <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/>
+          </svg>
+        </div>
+        <h3>Drop your CSV file here</h3>
+        <p>or <span>click to browse</span> &nbsp;·&nbsp; .csv / .txt accepted</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Step 2: Configure -->
+  <div id="configSection" style="display:none;">
+    <div class="card">
+      <div class="card-title">02 — Configure Output</div>
+
+      <div class="settings-grid">
+        <div class="field">
+          <label>Report Title</label>
+          <input type="text" id="reportTitle" placeholder="e.g. HR Helpdesk Tickets"/>
+        </div>
+        <div class="field">
+          <label>Max Description Length</label>
+          <select id="maxLen">
+            <option value="200">200 characters</option>
+            <option value="400" selected>400 characters</option>
+            <option value="800">800 characters</option>
+            <option value="99999">Full (no limit)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Strip HTML Tags?</label>
+          <select id="stripHtml">
+            <option value="true" selected>Yes — clean output</option>
+            <option value="false">No — keep raw HTML</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Output Filename</label>
+          <input type="text" id="outFilename" placeholder="output_readable"/>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:1.25rem;">
+        <label>Columns to include <span class="chip-hint">(click to toggle)</span></label>
+        <div class="cols-wrap" id="colChips"></div>
+      </div>
+
+      <button class="btn-convert" id="btnConvert" onclick="doConvert()">
+        ⚡ Convert to Readable TXT
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Step 3: Result -->
+  <div id="resultSection" style="display:none;">
+    <div class="card">
+      <div class="card-title">03 — Output Preview</div>
+      <div class="stats-row" id="statsRow"></div>
+      <div class="preview-area" id="previewArea"></div>
+      <div class="btn-row">
+        <button class="btn-download" id="downloadBtn" onclick="downloadFile()">
+          ↓ Download TXT
+        </button>
+        <button class="btn-reset" onclick="resetAll()">↩ Convert Another</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
